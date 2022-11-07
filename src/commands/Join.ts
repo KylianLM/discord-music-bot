@@ -29,7 +29,5 @@ export const Join: Command = {
                 interaction.reply('No channel found.');
             }
         })
-    
-        
     }
 }

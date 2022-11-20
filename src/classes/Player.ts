@@ -18,7 +18,7 @@ export class Player {
     public test(guild: Guild)
     {
         const player = createAudioPlayer();
-        const resource = createAudioResource(join(__dirname, 'videoplayback.mp3'), {inlineVolume: true})
+        const resource = createAudioResource(join(__dirname, 'Nek.mp3'), {inlineVolume: true})
         resource.volume?.setVolume(0.5);
         
         player.play(resource);

@@ -1,10 +1,12 @@
-import {Client, CommandInteraction} from "discord.js";
-import {Command} from "../Command";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { CommandInterface } from "src/interfaces/command";
 
-export const Ping: Command = {
-    name: "ping",
-    description: "Replies with Pong!",
-    run: async(client: Client, interaction: CommandInteraction) => {
+export const Ping: CommandInterface = {
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Replies with Pong!'),
+    run: async (interaction: ChatInputCommandInteraction) => {
         await interaction.reply("Pong!")
+
     }
 }

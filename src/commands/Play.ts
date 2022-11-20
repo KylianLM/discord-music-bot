@@ -1,11 +1,12 @@
-import { Client, CommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction, Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { Player } from "../classes/Player";
-import { Command } from "src/Command";
+import { CommandInterface } from "src/interfaces/command";
 
-export const Play: Command = {
-    name: "play",
-    description: "test",
-    run: async (client: Client, interaction: CommandInteraction) => {
+export const Play: CommandInterface = {
+    data: new SlashCommandBuilder()
+        .setName("play")
+        .setDescription("test"),
+    run: async (interaction: ChatInputCommandInteraction) => {
         const player = Player.getInstance();
         if (interaction.guild) {
             player.test(interaction.guild);

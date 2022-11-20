@@ -1,12 +1,13 @@
 import { getVoiceConnection } from "@discordjs/voice";
-import { Client, CommandInteraction } from "discord.js";
-import { Command } from "src/Command";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
+import { CommandInterface } from "src/interfaces/command"
 
-export const Leave: Command = {
-    name: "leave",
-    description: "Leave the voice channel if the bot is connected",
-    run: async (client: Client, interaction: CommandInteraction) => {
-        if(interaction.inGuild()) {
+export const Leave: CommandInterface = {
+    data: new SlashCommandBuilder()
+        .setName("leave")
+        .setDescription("Leave the voice channel if the bot is connected."),
+    run: async (interaction: ChatInputCommandInteraction) => {
+        if (interaction.inGuild()) {
             const connection = getVoiceConnection(interaction.guildId)
             connection?.destroy();
             await interaction.reply("I go home.")

@@ -1,11 +1,16 @@
-import { Client, CommandInteraction } from "discord.js";
-import { Command } from "../Command";
+import { ChannelType, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { joinVoiceChannel } from "@discordjs/voice";
+import { CommandInterface } from "src/interfaces/command";
 
-export const Join: Command = {
-    name: "join",
-    description: "Join the current user's channel.",
-    run: async (client: Client, interaction: CommandInteraction) => {
+export const Join: CommandInterface = {
+    data: new SlashCommandBuilder()
+        .setName('join')
+        .setDescription("Join the current user's channel.")
+        .addChannelOption(option =>
+            option.setName('channel')
+                .setDescription('The channel to echo into')
+                .addChannelTypes(ChannelType.GuildVoice)),
+    run: async (interaction: ChatInputCommandInteraction) => {
         let channelNotFound = true;
         interaction.guild?.channels.fetch().then(channels => {
             channels.forEach(channel => {
@@ -24,7 +29,7 @@ export const Join: Command = {
                     })
                 }
             })
-            
+
             if (channelNotFound) {
                 interaction.reply('No channel found.');
             }
